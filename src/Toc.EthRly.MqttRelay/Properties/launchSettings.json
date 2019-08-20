@@ -1,0 +1,14 @@
+{
+  "profiles": {
+    "Toc.EthRly.MqttRelay.Client": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "ETHRLY_TIMEOUT": "4999",
+        "MQTT_CLIENTID": "ethrly_mqtt_client",
+        "MQTT_IP": "127.0.0.1",
+        "ETHRLY_IP": "192.168.1.150",
+        "ETHRLY_PUBLISH_INTERVAL": "30"
+      }
+    }
+  }
+}
