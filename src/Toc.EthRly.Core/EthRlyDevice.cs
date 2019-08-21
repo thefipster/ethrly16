@@ -47,9 +47,8 @@ namespace Toc.EthRly.Core
 
         public async Task<bool[]> GetRelaysStatesAsync()
         {
-            var packet = new Packet(Commands.GetRelayStates);
-            var answer = await _tranceiver.TranceiveAsync(packet);
-            var states = answer.Payload.ToStateArray(_options.RelayCount);
+            var stateMap = await tranceive(Commands.GetRelayStates);
+            var states = stateMap.Payload.ToStateArray(_options.RelayCount);
             return states;
         }
 
@@ -82,23 +81,26 @@ namespace Toc.EthRly.Core
 
         public async Task<double> GetVoltageAsync()
         {
-            var request = new Packet(Commands.GetInputVoltage);
-            var response = await _tranceiver.TranceiveAsync(request);
-            return response.Payload.ToVoltage();
+            var voltage = await tranceive(Commands.GetInputVoltage);
+            return voltage.Payload.ToVoltage();
         }
 
         public async Task<int> GetFirmwareVersionAsync()
         {
-            var request = new Packet(Commands.GetFirmwareVersion);
-            var response = await _tranceiver.TranceiveAsync(request);
-            return response.Payload.ToFirmwareVersion();
+            var firmware = await tranceive(Commands.GetFirmwareVersion);
+            return firmware.Payload.ToFirmwareVersion();
         }
 
         public async Task<byte[]> GetMacAddressAsync()
         {
-            var request = new Packet(Commands.GetMacAddress);
-            var response = await _tranceiver.TranceiveAsync(request);
-            return response.Payload;
+            var macAddress = await tranceive(Commands.GetMacAddress);
+            return macAddress.Payload;
+        }
+
+        private async Task<Packet> tranceive(Commands command)
+        {
+            var request = new Packet(Commands.GetFirmwareVersion);
+            return await _tranceiver.TranceiveAsync(request);
         }
 
         private void throwExceptionOnBadIndex(int relayIndex)
@@ -115,8 +117,6 @@ namespace Toc.EthRly.Core
         }
 
         public void Dispose()
-        {
-            _tranceiver.Dispose();
-        }
+            => _tranceiver.Dispose();
     }
 }
