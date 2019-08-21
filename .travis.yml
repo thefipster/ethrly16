@@ -15,6 +15,6 @@ script:
   - cd src
   - dotnet restore
   - dotnet build
-  - dotnet test --filter FullyQualifiedName~UnitTest
+  - dotnet test --filter FullyQualifiedName~UnitTest /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:Exclude=[xunit*]* /p:CoverletOutput=./../../
 after_script:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
