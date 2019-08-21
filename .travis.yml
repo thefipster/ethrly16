@@ -16,6 +16,7 @@ script:
   - dotnet restore
   - dotnet build
   - dotnet test --filter FullyQualifiedName~UnitTest /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:Exclude=[xunit*]* /p:CoverletOutput=./../../
+  - cd ..
   - ./cc-test-reporter format-coverage --input-type cobertura coverage.cobertura.xml
   - ./cc-test-reporter upload-coverage
 after_script:
