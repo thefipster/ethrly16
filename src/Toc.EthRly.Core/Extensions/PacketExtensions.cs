@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace Toc.EthRly.Core.Extensions
 {
-    public static class ByteExtension
+    public static class PacketExtensions
     {
         /// <summary>
         /// Insert the statemap. A byte where each bit represents a relay state. 
@@ -12,13 +12,13 @@ namespace Toc.EthRly.Core.Extensions
         /// <param name="stateMap">1 byte bitmap for relay states. 0 = off, 1 = on.</param>
         /// <param name="relayCount">Number of bits used</param>
         /// <returns>bool[] representing the bits as bools</returns>
-        public static bool[] ToStateArray(this byte[] payload, int relayCount)
+        public static bool[] ToStateArray(this Packet packet, int relayCount)
         {
-            byte stateMap = payload.FirstOrDefault();
-            bool[] bitField = new bool[relayCount];
-            byte bitMask = (byte)Math.Pow(2, relayCount - 1);
+            var stateMap = packet.Payload.FirstOrDefault();
+            var bitField = new bool[relayCount];
+            var bitMask = (byte)Math.Pow(2, relayCount - 1);
 
-            for (int i = relayCount - 1; i >= 0; i--)
+            for (var i = relayCount - 1; i >= 0; i--)
             {
                 if (stateMap >= bitMask)
                 {
@@ -32,16 +32,16 @@ namespace Toc.EthRly.Core.Extensions
             return bitField;
         }
 
-        public static double ToVoltage(this byte[] payload)
+        public static double ToVoltage(this Packet packet)
         {
-            var sigByte = payload.FirstOrDefault();
+            var sigByte = packet.Payload.FirstOrDefault();
             return (double)sigByte / 10;
         }
 
-        public static int ToFirmwareVersion(this byte[] payload)
+        public static int ToFirmwareVersion(this Packet packet)
         {
-            var firmwareByte = payload.FirstOrDefault();
-            return (int)firmwareByte;
+            var firmwareByte = packet.Payload.FirstOrDefault();
+            return firmwareByte;
         }
     }
 }

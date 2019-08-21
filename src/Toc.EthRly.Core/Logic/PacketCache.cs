@@ -7,14 +7,13 @@ using Toc.EthRly.Core.Models;
 
 namespace Toc.EthRly.Core
 {
-    public class PaketCache : IDisposable
+    public class PacketCache : IDisposable
     {
         private readonly Options _options;
-
         private readonly ConcurrentQueue<Packet> _requests;
         private readonly ConcurrentDictionary<Packet, Packet> _responses;
 
-        public PaketCache(Options options)
+        public PacketCache(Options options)
         {
             _options = options;
             _requests = new ConcurrentQueue<Packet>();
@@ -27,7 +26,7 @@ namespace Toc.EthRly.Core
         public void Enqueue(Packet packet)
         {
             if (_requests.Count >= _options.CommandQueueLength)
-                throw new InvalidOperationException("Request queue full. Ignoring packet.");
+                throw new QueueIsFullException("RequestQueue");
 
             _requests.Enqueue(packet);
         }

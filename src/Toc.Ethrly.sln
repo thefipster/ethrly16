@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.329
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29102.190
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Toc.EthRly.Core", "Toc.EthRly.Core\Toc.EthRly.Core.csproj", "{1C6569EA-D42A-4AC4-97CB-FBF561D941C4}"
 EndProject
@@ -10,6 +10,15 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Toc.EthRly.Core.UnitTest", "Toc.EthRly.Core.UnitTest\Toc.EthRly.Core.UnitTest.csproj", "{1FB47811-A60D-42F7-ABE6-6616CF968FD1}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Toc.EthRly.MqttRelay", "Toc.EthRly.MqttRelay\Toc.EthRly.MqttRelay.csproj", "{3386CF35-1C0A-442B-9E0D-927CEAB599D6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{DBDFAA18-4313-4069-93C1-B5079BBFFE18}"
+	ProjectSection(SolutionItems) = preProject
+		..\.gitignore = ..\.gitignore
+		..\.travis.yml = ..\.travis.yml
+		..\CODE_OF_CONDUCT.md = ..\CODE_OF_CONDUCT.md
+		..\LICENSE = ..\LICENSE
+		..\README.md = ..\README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
