@@ -3,10 +3,12 @@ mono: none
 sudo: required
 dist: xenial
 dotnet: 2.2
+env:
+  global:
+    CC_TEST_REPORTER_ID=abdd619472aecc0861010f14c40a68376b229ba465a91620e278dcc4c06307d7
 global:
   - DOTNET_SKIP_FIRST_TIME_EXPERIENCE=true
   - DOTNET_CLI_TELEMETRY_OPTOUT=1
-  - CC_TEST_REPORTER_ID=abdd619472aecc0861010f14c40a68376b229ba465a91620e278dcc4c06307d7
 before_script:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
