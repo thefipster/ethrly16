@@ -16,10 +16,10 @@ namespace Toc.EthRly.Core.IntegrationTest
             var options = new Options("192.168.1.150");
             var device = new EthRlyDevice(options);
 
-            await turnAllRelaysOff(device);
-            await turnAllRelaysOnOneByOne(device);
-            await turnAllRelaysOffOneByOne(device);
-            await turnAllRelaysOn(device);
+            await switchAllRelays(device, false);
+            await switchAllRelaysOneByOne(device, true);
+            await switchAllRelaysOneByOne(device, false);
+            await switchAllRelays(device, true);
             await toggleAllRelays(device);
 
             var voltage = await device.GetVoltageAsync();
@@ -44,36 +44,19 @@ namespace Toc.EthRly.Core.IntegrationTest
             }
         }
 
-        private static async Task turnAllRelaysOn(EthRlyDevice device)
-        {
-            await device.SetAllRelaysAsync(true);
-            var states = await device.GetRelaysStatesAsync();
-            Assert.True(states.All(state => state));
-        }
-
-        private static async Task turnAllRelaysOffOneByOne(EthRlyDevice device)
+        private static async Task switchAllRelaysOneByOne(EthRlyDevice device, bool newState)
         {
             for (int address = 0; address < 8; address++)
             {
-                await device.SetRelayStateAsync(address, false);
+                await device.SetRelayStateAsync(address, newState);
                 var state = await device.GetRelayStateAsync(address);
                 Assert.False(state);
             }
         }
 
-        private static async Task turnAllRelaysOnOneByOne(EthRlyDevice device)
+        private static async Task switchAllRelays(EthRlyDevice device, bool newState)
         {
-            for (int address = 0; address < 8; address++)
-            {
-                await device.SetRelayStateAsync(address, true);
-                var state = await device.GetRelayStateAsync(address);
-                Assert.True(state);
-            }
-        }
-
-        private static async Task turnAllRelaysOff(EthRlyDevice device)
-        {
-            await device.SetAllRelaysAsync(false);
+            await device.SetAllRelaysAsync(newState);
             var states = await device.GetRelaysStatesAsync();
             Assert.True(states.All(state => !state));
         }
