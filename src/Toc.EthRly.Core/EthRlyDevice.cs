@@ -47,8 +47,8 @@ namespace Toc.EthRly.Core
 
         public async Task<bool[]> GetRelaysStatesAsync()
         {
-            var stateMap = await tranceive(Commands.GetRelayStates);
-            var states = stateMap.Payload.ToStateArray(_options.RelayCount);
+            var response = await tranceive(Commands.GetRelayStates);
+            var states = response.ToStateArray(_options.RelayCount);
             return states;
         }
 
@@ -81,14 +81,14 @@ namespace Toc.EthRly.Core
 
         public async Task<double> GetVoltageAsync()
         {
-            var voltage = await tranceive(Commands.GetInputVoltage);
-            return voltage.Payload.ToVoltage();
+            var response = await tranceive(Commands.GetInputVoltage);
+            return response.ToVoltage();
         }
 
         public async Task<int> GetFirmwareVersionAsync()
         {
-            var firmware = await tranceive(Commands.GetFirmwareVersion);
-            return firmware.Payload.ToFirmwareVersion();
+            var response = await tranceive(Commands.GetFirmwareVersion);
+            return response.ToFirmwareVersion();
         }
 
         public async Task<byte[]> GetMacAddressAsync()
