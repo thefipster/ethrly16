@@ -3,10 +3,18 @@ mono: none
 sudo: required
 dist: xenial
 dotnet: 2.2
-script:
-    - cd src
-    - dotnet restore
-    - dotnet build
 global:
-    - DOTNET_SKIP_FIRST_TIME_EXPERIENCE=true
-    - DOTNET_CLI_TELEMETRY_OPTOUT=1
+  - DOTNET_SKIP_FIRST_TIME_EXPERIENCE=true
+  - DOTNET_CLI_TELEMETRY_OPTOUT=1
+  - CC_TEST_REPORTER_ID=abdd619472aecc0861010f14c40a68376b229ba465a91620e278dcc4c06307d7
+before_script:
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
+script:
+  - cd src
+  - dotnet restore
+  - dotnet build
+  - dotnet test --filter FullyQualifiedName~UnitTest
+after_script:
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
