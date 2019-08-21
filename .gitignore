@@ -265,6 +265,6 @@ __pycache__/
 *.pyc
 \.vscode/
 
-coverage.json
+*coverage*
 
 public/
