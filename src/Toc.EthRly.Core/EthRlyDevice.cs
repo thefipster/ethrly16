@@ -48,8 +48,7 @@ namespace Toc.EthRly.Core
         public async Task<bool[]> GetRelaysStatesAsync()
         {
             var response = await tranceive(Commands.GetRelayStates);
-            var states = response.ToStateArray(_options.RelayCount);
-            return states;
+            return response.ToStateArray(_options.RelayCount);
         }
 
         public async Task SetRelayStateAsync(int relayIndex, bool newState)

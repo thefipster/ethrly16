@@ -14,11 +14,11 @@ namespace Toc.EthRly.Core.Extensions
         /// <returns>bool[] representing the bits as bools</returns>
         public static bool[] ToStateArray(this Packet packet, int relayCount)
         {
-            byte stateMap = packet.Payload.FirstOrDefault();
-            bool[] bitField = new bool[relayCount];
-            byte bitMask = (byte)Math.Pow(2, relayCount - 1);
+            var stateMap = packet.Payload.FirstOrDefault();
+            var bitField = new bool[relayCount];
+            var bitMask = (byte)Math.Pow(2, relayCount - 1);
 
-            for (int i = relayCount - 1; i >= 0; i--)
+            for (var i = relayCount - 1; i >= 0; i--)
             {
                 if (stateMap >= bitMask)
                 {

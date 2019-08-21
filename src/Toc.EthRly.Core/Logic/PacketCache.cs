@@ -10,7 +10,6 @@ namespace Toc.EthRly.Core
     public class PacketCache : IDisposable
     {
         private readonly Options _options;
-
         private readonly ConcurrentQueue<Packet> _requests;
         private readonly ConcurrentDictionary<Packet, Packet> _responses;
 
