@@ -38,11 +38,11 @@ namespace Toc.EthRly.MqttRelay.Models
 
         private void setupConfig()
         {
-            Config = new Config();
             var config = new ConfigurationBuilder()
                 .AddJsonFile(AppSettingsFile, true, true)
                 .Build();
 
+            Config = new Config();
             config.GetSection(EthrlyConfig.SectionName).Bind(Config.Ethrly);
             config.GetSection(MqttConfig.SectionName).Bind(Config.Mqtt);
         }
@@ -89,8 +89,10 @@ namespace Toc.EthRly.MqttRelay.Models
                 {
                     Console.WriteLine("Reconnect failed: " + exception.Message);
                 }
-
-                await Task.Delay(TimeSpan.FromSeconds(1), Token);
+                finally
+                {
+                    await Task.Delay(TimeSpan.FromSeconds(1), Token);
+                }
             }
         }
     }
