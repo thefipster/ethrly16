@@ -48,7 +48,7 @@ namespace Toc.EthRly.Core.IntegrationTest
         {
             for (int address = 0; address < 8; address++)
             {
-                await device.SetRelayStateAsync(address, newState);
+                device.SetRelayState(address, newState);
                 var state = await device.GetRelayStateAsync(address);
                 Assert.False(state);
             }
@@ -56,7 +56,7 @@ namespace Toc.EthRly.Core.IntegrationTest
 
         private static async Task switchAllRelays(EthRlyDevice device, bool newState)
         {
-            await device.SetAllRelaysAsync(newState);
+            device.SetAllRelays(newState);
             var states = await device.GetRelaysStatesAsync();
             Assert.True(states.All(state => !state));
         }

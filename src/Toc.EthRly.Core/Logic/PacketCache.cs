@@ -3,11 +3,12 @@ using System.Collections.Concurrent;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using Toc.EthRly.Core.Exceptions;
+using Toc.EthRly.Core.Interface;
 using Toc.EthRly.Core.Models;
 
 namespace Toc.EthRly.Core
 {
-    public class PacketCache : IDisposable
+    public class PacketCache : ICache
     {
         private readonly Options _options;
         private readonly ConcurrentQueue<Packet> _requests;

@@ -61,7 +61,7 @@ namespace Toc.EthRly.MqttRelay.Tasks
             {
                 case 0:
                 case 1:
-                    await _state.Ethrly.SetRelayStateAsync(address, command == 1);
+                    _state.Ethrly.SetRelayState(address, command == 1);
                     return command == 1;
                 case 2:
                     return await _state.Ethrly.ToggleRelayStateAsync(address);

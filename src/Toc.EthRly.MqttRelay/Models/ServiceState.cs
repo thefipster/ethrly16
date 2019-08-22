@@ -55,15 +55,18 @@ namespace Toc.EthRly.MqttRelay.Models
 
         private void setupEthrly()
         {
-            var options = new Options(Config.Ethrly.Hostname, Config.Ethrly.Port)
+            var options = new Options(
+                Config.Ethrly.Hostname, 
+                Config.Ethrly.Port, 
+                Config.Ethrly.Timeout, 
+                Token)
             {
-                Timeout = Config.Ethrly.Timeout,
                 DelayBetweenCommands = Config.Ethrly.DelayBetweenCommands,
                 CommandQueueLength = Config.Ethrly.CommandQueueLength,
                 RelayCount = Config.Ethrly.RelayCount
             };
 
-            Ethrly = new EthRlyDevice(options, Token);
+            Ethrly = new EthRlyDevice(options);
         }
 
         private void setupMqtt()
