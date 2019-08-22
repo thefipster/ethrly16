@@ -29,9 +29,7 @@ namespace Toc.EthRly.MqttRelay.Tasks
             _state.Mqtt.MqttMsgPublishReceived += onMqttMessageReceived;
 
             while (!_state.Token.IsCancellationRequested)
-            {
                 await Task.Delay(1000);
-            }
         }
 
         private async void onMqttMessageReceived(object sender, MqttMsgPublishEventArgs e)
